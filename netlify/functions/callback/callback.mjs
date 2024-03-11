@@ -1,6 +1,6 @@
 export const handler = async (event, context) => {
-  console.log(event);
-  console.log(context);
+  console.log(event.queryStringParameters.code);
+
   return {
     body: JSON.stringify({
       message: `Hello World`,

@@ -1,0 +1,1 @@
+https://developer.yahoo.com/oauth2/guide/flows_authcode/

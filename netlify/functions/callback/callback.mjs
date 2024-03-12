@@ -27,6 +27,8 @@ export const handler = async (event, context) => {
       body: JSON.stringify({
         message: `Hello World`,
         data,
+        Authorization: `Basic ${bearerToken}`,
+        "Content-Type": "application/x-www-form-urlencoded",
       }),
       statusCode: 200,
     };

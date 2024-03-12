@@ -11,13 +11,16 @@ export const handler = async (event, context) => {
     const bearerToken = Buffer.from(
       `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`
     );
-    const response = await fetch(`${baseURL}?${query}`, {
-      method: "POST",
-      headers: {
-        Authorization: bearerToken,
-      },
-      body: JSON.stringify(body),
-    });
+    const response = await fetch(
+      "https://api.login.yahoo.com/oauth2/get_token",
+      {
+        method: "POST",
+        headers: {
+          Authorization: bearerToken,
+        },
+        body: JSON.stringify(body),
+      }
+    );
     const data = await response.json();
     return {
       body: JSON.stringify({

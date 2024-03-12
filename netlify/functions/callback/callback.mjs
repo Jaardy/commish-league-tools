@@ -17,6 +17,7 @@ export const handler = async (event, context) => {
         method: "POST",
         headers: {
           Authorization: bearerToken,
+          "Content-Type": "application/x-www-form-urlencoded",
         },
         body: JSON.stringify(body),
       }

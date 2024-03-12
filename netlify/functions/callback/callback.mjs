@@ -8,10 +8,9 @@ export const handler = async (event, context) => {
       redirect_uri: "oob",
       code,
     };
-    const bearerToken = Buffer.toString(
-      `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`,
-      "base64"
-    );
+    const bearerToken = Buffer.from(
+      `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`
+    ).toString("base64");
     const response = await fetch(
       "https://api.login.yahoo.com/oauth2/get_token",
       {

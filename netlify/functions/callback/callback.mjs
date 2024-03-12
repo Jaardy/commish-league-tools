@@ -19,7 +19,7 @@ export const handler = async (event, context) => {
           Authorization: `Basic ${bearerToken}`,
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: JSON.stringify(body),
+        body: new URLSearchParams(body).toString(),
       }
     );
     const data = await response.json();

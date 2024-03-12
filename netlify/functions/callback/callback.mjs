@@ -1,14 +1,23 @@
 export const handler = async (event, context) => {
   const { code } = event.queryStringParameters;
-  console.log(event);
+
   if (code) {
     const baseURL = "https://api.login.yahoo.com/oauth2/get_token";
-    const client_id = `client_id=${process.env.CLIENT_ID}`;
-    const client_secret = `client_secret=${process.env.CLIENT_SECRET}`;
-    const redirect_uri = `redirect_uri=${process.env.REDIRECT_URI}`;
-    const grant_type = "grant_type=authorization_code";
-    const query = `${client_id}&${client_secret}&${redirect_uri}&${grant_type}&code=${code}`;
-    const response = await fetch(`${baseURL}?${query}`, { method: "POST" });
+    const body = {
+      grant_type: "authorization_code",
+      redirect_uri: "oob",
+      code,
+    };
+    const bearerToken = Buffer.from(
+      `${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`
+    );
+    const response = await fetch(`${baseURL}?${query}`, {
+      method: "POST",
+      headers: {
+        Authorization: bearerToken,
+      },
+      body: JSON.stringify(body),
+    });
     const data = await response.json();
     return {
       body: JSON.stringify({
